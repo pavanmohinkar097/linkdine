@@ -1,11 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-
-
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Feed from './Feed';
+import Widget from './Widget';
 function App() {
   return (
-    <h1>gbh</h1>
+    <div className="app_wrapper">
+      <Header />
+      <div className="app_body">
+        <Sidebar />
+        <Feed/>
+        <Widget/>
+
+      </div>
+      </div>
   );
 }
 
