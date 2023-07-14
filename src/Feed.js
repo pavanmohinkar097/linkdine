@@ -7,43 +7,34 @@ import ArticleIcon from "@mui/icons-material/Article";
 import "./css/feed.css";
 import Post from "./Post";
 
-
-
-
-
-
 const Feed = () => {
-  const[posts,setPost]=useState([])
+  // const[posts,setPost]=useState([])
   const [input, setInput] = useState();
   const submitPost = (e) => {
     e.preventDefault();
-    
-    
+    // Extra part firebase//----------------->
+    db.collection("posts").add({
+      name: "Pavan Mohinkar",
+      description: "this is test",
+      message: input,
+      photoURL: "",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setInput("");
   };
-  // useEffect(()=>{
-  //   db.collection("posts").orderBy("timestamp","desc").onSnapshot(snapshot=>{
-  //     setPost(snapshot.docs.map(doc=>({
-  //       id:doc.id,
-  //       data:doc.data()
-
-  //     })))
-  //   })
-
-  // },[])
-  // console.log(posts)
 
   return (
     <div className="feed">
       <div className="feed_input">
         <div className="feed_form">
           <Avatar />
-          <form on onSubmit={submitPost}>
+          <form onSubmit={submitPost}>
             <input
               type="text"
               placeholder="Start a post"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
-            />
+              onChange={(e) => setInput(e.target.value)}/>
+            
             <input type="submit" />
           </form>
         </div>
@@ -67,7 +58,13 @@ const Feed = () => {
           </div>
         </div>
       </div>
-      <Post />
+      {/* <Post /> */}
+      <Post
+        name="Pavan Mohinkar"
+        description="This test"
+        message="we are learning"
+        photoURL="https://tse2.mm.bing.net/th?id=OIP.8Cl81-tzomDnq5QyPhGyVgHaD4&pid=Api&P=0&h=180"
+      />
     </div>
   );
 };
